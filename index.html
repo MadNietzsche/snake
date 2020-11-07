@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Reticulate:</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Antonio Alvarez" />
+    <link rel="stylesheet" href="libs\remark-css\shinobi.css" type="text/css" />
+    <link rel="stylesheet" href="libs\remark-css\ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="assets\custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Reticulate:
+## una historia de dos lenguajes
+### <br><br>Antonio Alvarez
+### <br>07.11.2020<br><br>
+
+---
+
+
+
+
+
+layout: false
+class: bg-lime split-30 hide-slide-number
+
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[¡Bienvenidos!]
+]
+]]
+
+---
+class: hide-slide-number
+
+# .teal[El mundo está cambiando y cambiara mas...]
+
+&lt;br&gt;
+
+### - Las aplicaciones y el análisis a los datos está en constante actualización
+
+### - Para los analistas, es importante estar familiarizado con las prácticas adecuadas en su campo
+
+### - El problema viene _siempre_ primero que las soluciones
+
+---
+class: middle center bg-lime hide-slide-number
+
+# ¿Qué escojo?
+
+&lt;img src="img/larry.gif", width="60%"&gt;
+
+---
+layout: true
+class: split-two with-thick-border border-white hide-slide-number
+
+.column.bg-teal[.content[
+
+&lt;br&gt;
+
+# .white[.center[¿Por qué Python?]]
+
+&lt;br&gt;
+
+### - Lenguaje de propósito general con usos más allá del análisis de datos
+
+### - Facilidad de despliegue de aplicaciones y productos informáticos
+
+### - Alta legibilidad entre los lenguajes computacionales
+
+&lt;br&gt;
+
+.center[
+&lt;img src="img/py_logo.png", width="40%"&gt;
+]
+
+]]    
+
+.column.bg-light-blue[.content[
+
+&lt;br&gt;
+
+# .white[.center[¿Por qué R?]]
+
+&lt;br&gt;
+
+### - Lenguaje específico para Análisis estadístico
+
+### - Vectorización es parte de su diseño i.e. Algebra Lineal
+
+### - Alto número de paquetes de conocimiento especifico
+
+&lt;br&gt;
+
+.center[
+&lt;img src="img/r_logo.png", width="50%"&gt;
+]
+
+]]
+---
+class: hide-col2
+count:false
+
+---
+class:hide-col1
+count:false
+
+---
+layout: false
+class: middle center bg-lime hide-slide-number
+
+
+&lt;img src="img/dos.gif", width="60%"&gt;
+
+---
+class: bg-main6 hide-slide-number
+
+# .center[Reticulate 🐍]
+
+&lt;br&gt;
+
+### - Paquete que conecta el ambiente de Python con R y viceversa
+
+### - Objetos y funciones pueden ser traducidos y ser usados por ambos lenguajes
+
+### - Personalizable en la versión de Python que se va usar
+
+### - R Markdowns, cuadernos de Jupyter, todo con alto rendimiento inter-operativo
+
+.center[
+&lt;img src="img/r_py.png", width="55%"&gt;
+]
+
+---
+class: split-two with-thick-border border-white hide-slide-number    
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+
+]]
+
+
+.row[.content.vmiddle[
+
+]]
+
+
+.row[.content.vmiddle[
+
+
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content.vmiddle.center[
+
+# .white[¡3 sencillos pasos!]
+
+]]
+---
+class: split-two with-thick-border border-white hide-slide-number
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+### - Instalar R y RStudio
+
+]]
+
+
+.row[.content.vmiddle[
+
+
+
+]]
+
+
+.row[.content.vmiddle[
+
+
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content.vmiddle.center[
+
+# .white[¡3 sencillos pasos!]
+
+]]
+
+---
+class: split-two with-thick-border border-white hide-slide-number    
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+### - Instalar R y RStudio
+
+]]
+
+
+.row[.content.vmiddle[
+
+### - Instalar `reticulate`
+
+]]
+
+
+.row[.content.vmiddle[
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content.vmiddle[
+
+
+```r
+install.packages("reticulate")
+library(reticulate)
+```
+
+
+]]
+---
+class: split-two with-thick-border border-white hide-slide-number    
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+### - Instalar R y RStudio
+
+]]
+
+
+.row[.content.vmiddle[
+
+### - Instalar `reticulate`
+
+]]
+
+
+.row[.content.vmiddle[
+
+### - Instalar `tidyverse`(recomendado)
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content.vmiddle[
+
+
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+]]
+
+---
+class: bg-main6 hide-slide-number
+
+# Configuración de reticulate
+
+### - `reticulate` tiene su propia instalación de Python que viene con Conda, si es que no detecta una versión de Python
+
+### - Podemos especificar una variable global en el archivo .Renviron, localizado en el directorio Documentos
+
+
+```r
+RETICULATE_PYTHON="C:/Users/Tukey/AppData/Local/Programs/Python/Python38/python.exe"
+```
+
+### - Se usara esta versión de Python como default
+
+### - Cada proyecto también puede tener su propia versión de Python
+
+---
+class: bg-teal
+
+# .white[Conversión de datos]
+
+.center[
+
+&lt;img src="img/tipos.png", width="100%"&gt;
+
+]
+
+---
+class: middle hide-slide-number
+
+# .green[Llamando a Python]
+
+&lt;br&gt;
+&lt;br&gt;
+
+## 1. Python en Rmarkdown 📚
+
+&lt;br&gt;
+
+## 2. Importar modulos de Python 🏤
+
+&lt;br&gt;
+
+## 3. Llamar scripts de Python 🗳
+
+&lt;br&gt;
+
+## 4. Acceso al REPL de Python 📟
+
+
+---
+layout: false
+class: bg-lime split-30 hide-slide-number
+
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[Ejemplo: Parseo en R, modelando con Sci-kit]
+]
+]]
+
+---
+class: split-two hide-slide-number
+
+.column.bg-light-blue[.content[
+
+&lt;br&gt;
+
+# .white[Rapida introducción a RMarkdown]
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+### Jupyter de R
+
+### Usa snippets para combinar el código con texto escrito
+
+### Puede generar varios tipos de archivos: desde PDFs y Powerpoints, hasta páginas webs y dashboards
+
+]]
+
+
+.column.bg-black[.content.vmiddle[
+
+
+&lt;img src="img/snip_r.png", width="80%"&gt;
+
+&lt;br&gt;
+
+### - .red[Lenguaje]
+
+### - .green[Nombre del snippet]
+
+### - .orange[Opciones de impresión de knitr]
+
+&lt;br&gt;
+
+&lt;img src="img/snip_py.png", width="80%"&gt;
+
+]]
+
+---
+class: split-70 with-thick-border border-black hide-slide-number
+
+.column.bg-indigo[.content[
+
+
+```r
+library(tidyverse)
+library(recipes)
+library(reticulate)
+#use_python("ruta/a-otra/ver/python.exe")
+
+df &lt;- readxl::read_xls("data/sleep.xls")
+```
+
+
+```
+## [1] 445  53
+```
+
+```
+##                       ID                Age_Group                      Sex 
+##              "character"                 "double"              "character" 
+##   Total_years_dispatcher  Total_years_present_job                 Job_type 
+##                 "double"                 "double"                 "double" 
+##           Marital_Status       Childrendependents     Children_under_2_yrs 
+##              "character"                 "double"                 "double" 
+##           Caff_Beverages    If_yes_how_many_daily   Sick_Days_in_last_year 
+##                 "double"                 "double"                 "double" 
+##            Health_status    Older_Younger_or_Same Diagnosed_Sleep_disorder 
+##                 "double"                 "double"                 "double" 
+##              Sleep_Apnea        Medical_treatment            SunStart_Time 
+##                 "double"                 "double"                 "double" 
+##            MonStart_Time           TuesStart_Time            WedStart_Time 
+##                 "double"                 "double"                 "double" 
+##            ThuStart_Time            FriStart_Time            SatStart_Time 
+##                 "double"                 "double"                 "double" 
+##              SunEnd_Time              MonEnd_Time             TuesEnd_Time 
+##                 "double"                 "double"                 "double" 
+##              WedEnd_Time              ThuEnd_Time              FriEnd_Time 
+##                 "double"                 "double"                 "double" 
+##              SatEnd_Time             job_schedule          Relief_schedule 
+##                 "double"                 "double"              "character" 
+##        Avg_Work_Hrs_Week 
+##                 "double"
+```
+
+
+]]
+
+.column.bg-cyan[.content.vmiddle.center[
+
+# Set-up 
+
+]]
+
+---
+class: split-70 with-thick-border border-black hide-slide-number
+
+.column.bg-indigo[.content[
+
+
+```r
+library(tidyverse)
+library(recipes)
+library(reticulate)
+#use_python("ruta/a-otra/ver/python.exe")
+
+df &lt;- readxl::read_xls("data/sleep.xls")
+```
+
+
+```r
+sleep &lt;- df %&gt;%
+  select(
+      Diagnosed_Sleep_disorder, Age_Group, Sex, Total_years_dispatcher,
+      Total_years_present_job, Marital_Status, Childrendependents,
+      Children_under_2_yrs, Caff_Beverages, Sick_Days_in_last_year,
+      Health_status, Avg_Work_Hrs_Week, FRA_report, Phys_Drained,
+      Mentally_Drained, Alert_at_Work, Job_Security
+  ) %&gt;%
+  rename_all(tolower) %&gt;%
+  mutate_if(is.character, as.numeric) %&gt;%
+  mutate_at(vars(diagnosed_sleep_disorder, sex, caff_beverages, fra_report),
+            ~ -(. - 2)) %&gt;%
+  mutate_at(vars(marital_status), ~ (. - 1)) %&gt;%
+  drop_na()
+```
+
+
+]]
+
+.column.bg-cyan[.content.vmiddle.center[
+
+# Parseo
+
+]]
+---
+class: split-70 with-thick-border border-black hide-slide-number
+
+.column.bg-indigo[.content[
+
+
+```r
+numeric_variables &lt;- c(
+  "total_years_dispatcher", "total_years_present_job",
+  "childrendependents", "children_under_2_yrs", 
+  "sick_days_in_last_year", "avg_work_hrs_week"
+)
+
+factor_variables &lt;- setdiff(colnames(sleep), numeric_variables)
+
+sleep &lt;- mutate_at(sleep, vars(factor_variables), as.factor)
+
+set.seed(2001)
+index &lt;- sample(1:nrow(sleep), floor(nrow(sleep) * .75))
+
+sleep_train &lt;- sleep[index, ]
+sleep_test &lt;- sleep[-index, ]
+```
+
+
+]]
+
+.column.bg-cyan[.content.vmiddle.center[
+
+# Preparación
+
+]]
+
+---
+class: split-70 with-thick-border border-black hide-slide-number
+
+.column.bg-indigo[.content[
+
+
+```r
+numeric_variables &lt;- c(
+  "total_years_dispatcher", "total_years_present_job",
+  "childrendependents", "children_under_2_yrs", 
+  "sick_days_in_last_year", "avg_work_hrs_week"
+)
+
+factor_variables &lt;- setdiff(colnames(sleep), numeric_variables)
+
+sleep &lt;- mutate_at(sleep, vars(factor_variables), as.factor)
+
+set.seed(2019)
+index &lt;- sample(1:nrow(sleep), floor(nrow(sleep) * .75))
+
+sleep_train &lt;- sleep[index, ]
+sleep_test &lt;- sleep[-index, ]
+```
+
+
+
+```r
+recipe_formula &lt;- recipe(diagnosed_sleep_disorder ~ ., sleep_train)
+
+recipe_steps &lt;- recipe_formula %&gt;%
+  step_dummy(factor_variables, -all_outcomes(), one_hot = TRUE) %&gt;%
+  themis::step_downsample(diagnosed_sleep_disorder) %&gt;%
+  step_center(numeric_variables) %&gt;%
+  step_scale(numeric_variables)
+
+recipe_prep &lt;- prep(recipe_steps, sleep_train, retain = TRUE)
+
+training_data &lt;- juice(recipe_prep)
+testing_data &lt;- bake(recipe_prep, sleep_test)
+```
+
+]]
+
+.column.bg-cyan[.content.vmiddle.center[
+
+# Receta
+
+]]
+---
+class: middle center bg-lime hide-slide-number
+
+
+&lt;img src="img/get-on.gif", width="60%"&gt;
+
+---
+class: split-30 with-thick-border border-black hide-slide-number
+
+.column.bg-lime[.content.vmiddle.center[
+
+# Set up
+
+]]
+
+
+.column.bg-teal[.content[
+
+
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+```
+
+
+]]
+
+---
+class: split-30 with-thick-border border-black hide-slide-number
+
+.column.bg-lime[.content.vmiddle.center[
+
+# División
+
+]]
+
+
+.column.bg-teal[.content[
+
+
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+```
+
+
+```python
+y_train = r.training_data['diagnosed_sleep_disorder']
+X_train = r.training_data.drop('diagnosed_sleep_disorder', axis = 1)
+
+y_test = r.testing_data['diagnosed_sleep_disorder']
+X_test = r.testing_data.drop('diagnosed_sleep_disorder', axis = 1)
+```
+
+
+]]
+
+---
+class: split-30 with-thick-border border-black hide-slide-number
+
+.column.bg-lime[.content.vmiddle.center[
+
+# Afinación
+
+]]
+
+
+.column.bg-teal[.content[
+
+
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+```
+
+
+```python
+y_train = r.training_data['diagnosed_sleep_disorder']
+X_train = r.training_data.drop('diagnosed_sleep_disorder', axis = 1)
+
+y_test = r.testing_data['diagnosed_sleep_disorder']
+X_test = r.testing_data.drop('diagnosed_sleep_disorder', axis = 1)
+```
+
+
+```python
+param_grid = [{'C': [0.01, 0.1, 1, 10, 100],
+               'gamma': [0.001, 0.01, 0.1, 1, 10],
+               'kernel': ['rbf', 'linear']}]
+
+grid = GridSearchCV(svm.SVC(), param_grid, cv = 5, scoring = 'balanced_accuracy')
+
+grid.fit(X_train, y_train)
+```
+
+```
+## GridSearchCV(cv=5, estimator=SVC(),
+##              param_grid=[{'C': [0.01, 0.1, 1, 10, 100],
+##                           'gamma': [0.001, 0.01, 0.1, 1, 10],
+##                           'kernel': ['rbf', 'linear']}],
+##              scoring='balanced_accuracy')
+```
+
+
+
+]]
+
+---
+class: split-30 with-thick-border border-black hide-slide-number
+
+.column.bg-lime[.content.vmiddle.center[
+
+# Mejores parámetros
+
+]]
+
+
+.column.bg-teal[.content[
+
+
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+```
+
+
+```python
+y_train = r.training_data['diagnosed_sleep_disorder']
+X_train = r.training_data.drop('diagnosed_sleep_disorder', axis = 1)
+
+y_test = r.testing_data['diagnosed_sleep_disorder']
+X_test = r.testing_data.drop('diagnosed_sleep_disorder', axis = 1)
+```
+
+
+```python
+param_grid = [{'C': [0.01, 0.1, 1, 10, 100],
+               'gamma': [0.001, 0.01, 0.1, 1, 10],
+               'kernel': ['rbf', 'linear']}]
+
+grid = GridSearchCV(svm.SVC(), param_grid, cv = 5, scoring = 'balanced_accuracy')
+
+grid.fit(X_train, y_train)
+```
+
+
+```python
+print(grid.best_params_)
+```
+
+```
+## {'C': 0.01, 'gamma': 0.001, 'kernel': 'rbf'}
+```
+
+
+]]
+
+---
+class: bg-teal hide-slide-number
+
+# .white[Reporte de Confusión]
+
+
+```python
+clf = grid.best_estimator_
+y_pred = clf.predict(X_test)
+
+print('Matriz de la Confusión:\n\n', confusion_matrix(y_test, y_pred))
+```
+
+```
+## Matriz de la Confusión:
+## 
+##  [[67 27]
+##  [ 6  4]]
+```
+
+```python
+print('\nReporte de clasificación:\n\n', classification_report(y_test, y_pred))
+```
+
+```
+## 
+## Reporte de clasificación:
+## 
+##                precision    recall  f1-score   support
+## 
+##            0       0.92      0.71      0.80        94
+##            1       0.13      0.40      0.20        10
+## 
+##     accuracy                           0.68       104
+##    macro avg       0.52      0.56      0.50       104
+## weighted avg       0.84      0.68      0.74       104
+```
+
+---
+class: bg-teal hide-slide-number
+
+# .white[Reporte de Confusión]
+
+
+```python
+print('\nPrecisión training: {:.2f}%'.format(clf.score(X_train, y_train)))
+```
+
+```
+## 
+## Precisión training: 0.73%
+```
+
+```python
+print('\nPrecisión test: {:.2f}%'.format(clf.score(X_test, y_test)))
+```
+
+```
+## 
+## Precisión test: 0.68%
+```
+
+### .white[Aún tenemos espacio para mejorar...]
+
+---
+class: split-two hide-slide-number
+
+
+.column.bg-teal[.content[
+
+&lt;br&gt;
+
+# .white[Grafiquemos la confusión]
+
+&lt;br&gt;
+
+
+```python
+conf_mat = confusion_matrix(y_test, y_pred)
+
+sns.heatmap(conf_mat, square = True, annot = True, fmt = 'g',
+            cbar = False, cmap = 'viridis')
+
+plt.xlabel('Predicho')
+plt.ylabel('Observado')
+plt.show()
+```
+
+
+]]
+
+.column.bg-lime[.content.vmiddle[
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" width="576" /&gt;
+
+
+]]
+
+---
+class: middle center bg-lime hide-slide-number
+
+# ¡Lo logramos! 
+
+&lt;img src="img/prettygood.gif", width="60%"&gt;
+
+---
+class: split-two with-thick-border border-white hide-slide-number
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+### .white[Podemos llamar objetos de Python a R]
+
+]]
+
+.row[.content.vmiddle[
+
+
+
+]]
+
+.row[.content.vmiddle[
+
+
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content[
+
+&lt;br&gt;
+
+# Otros detalles
+
+&lt;br&gt;
+
+
+```r
+py$conf_mat
+```
+
+```
+##      [,1] [,2]
+## [1,]   67   27
+## [2,]    6    4
+```
+
+
+]]
+
+---
+class: split-two with-thick-border border-white hide-slide-number
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+### .white[Podemos llamar objetos de Python a R]
+
+]]
+
+.row[.content.vmiddle[
+
+### .white[Podemos importar los módulos de Python y usar sus funciones]
+
+]]
+
+.row[.content.vmiddle[
+
+
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content[
+
+&lt;br&gt;
+
+# Otros detalles
+
+&lt;br&gt;
+
+
+```r
+tf &lt;- import("tensorflow")
+
+mujeres &lt;- tf$constant(150, name = "Empleadas")
+hombres &lt;- tf$constant(135, name = "Empleados")
+total &lt;- tf$add(mujeres, hombres)
+total
+```
+
+```
+## tf.Tensor(285.0, shape=(), dtype=float32)
+```
+
+
+]]
+
+---
+class: split-two with-thick-border border-white hide-slide-number
+
+.column.bg-teal[
+.split-three[
+
+.row[.content.vmiddle[
+
+### .white[Podemos llamar objetos de Python a R]
+
+]]
+
+.row[.content.vmiddle[
+
+### .white[Podemos importar los módulos de python y usar sus funciones]
+
+]]
+
+.row[.content.vmiddle[
+
+### .white[Podemos usar la consola de R para ejecutar el REPL de Python]
+
+]]
+
+
+]
+]
+
+.column.bg-light-blue[.content[
+
+&lt;br&gt;
+
+# Otros detalles
+
+.center[
+&lt;img src="img/repl_py.png", width="77%"&gt;
+]
+]]
+
+---
+layout: false
+class: bg-lime split-30 hide-slide-number
+
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[¡Gracias!]
+]
+]]
+
+---
+class: bg-main6 hide-slide-number
+
+# .orange[Agradecimientos]
+
+&lt;br&gt;
+
+## - A la Sociedad Ecuatoriana Estadística 
+
+## - A Yihui Xie y a Emi Tanaka por los paquetes de `xaringan` y el tema `kunoichi`
+
+## - A los colaboradores RStudio por desarrollar `reticulate` 🐍
+
+.center[
+
+&lt;img src="img/thank.gif", width="30%"&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

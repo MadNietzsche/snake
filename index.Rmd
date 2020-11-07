@@ -726,8 +726,8 @@ class: bg-teal hide-slide-number
 # .white[Reporte de Confusión]
 
 ```{python, echo=TRUE, message=FALSE, warning=FALSE}
-print('\nPrecisión training: {:.2f}%'.format(clf.score(X_train, y_train)))
-print('\nPrecisión test: {:.2f}%'.format(clf.score(X_test, y_test)))
+print('\nPrecisión training: {:.2f}'.format(clf.score(X_train, y_train)))
+print('\nPrecisión test: {:.2f}'.format(clf.score(X_test, y_test)))
 ```
 
 ### .white[Aún tenemos espacio para mejorar...]
@@ -886,7 +886,7 @@ class: split-two with-thick-border border-white hide-slide-number
 
 .row[.content.vmiddle[
 
-### .white[Podemos importar los módulos de python y usar sus funciones]
+### .white[Podemos importar los módulos de Python y usar sus funciones]
 
 ]]
 
